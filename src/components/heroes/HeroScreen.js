@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useParams, Navigate, useNavigate } from 'react-router-dom';
 import { getHeroById } from '../../selectors/getHeroById';
 
@@ -8,7 +8,7 @@ export const HeroScreen = ({ history }) => {
     const { heroeId } = useParams();
     const navigate = useNavigate();
     
-    const hero = getHeroById(heroeId);
+    const hero = useMemo(() => getHeroById( heroeId ), [ heroeId ]);
 
     if ( !hero ) {
         return <Navigate to={'/'} />
@@ -16,7 +16,6 @@ export const HeroScreen = ({ history }) => {
 
     const handleReturn = () => {
         if ( window.history.length <= 2 ) {
-            // history.push('/');
             navigate('/');
         } else {
             navigate(-1);
