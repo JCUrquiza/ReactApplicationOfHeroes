@@ -4,20 +4,18 @@ import {
     Route,
     Routes
   } from "react-router-dom";
-import { Navbar } from '../components/ui/Navbar';
 import { LoginScreen } from '../components/login/LoginScreen';
-import { MarvelScreen } from '../components/marvel/MarvelScreen';
+import { DashboardRoutes } from './DashboardRoutes';
 
 
 export const AppRouter = () => {
     return (
         <Router>
             <div>
-                <Navbar />
-
                 <Routes>
-                    <Route exact path='/login' Component={LoginScreen} />
-                    <Route exact path='/' Component={MarvelScreen} />
+                    <Route exact path="/login" Component={LoginScreen} />
+
+                    <Route path="*" Component={DashboardRoutes} />
                 </Routes>
             </div>
         </Router>
