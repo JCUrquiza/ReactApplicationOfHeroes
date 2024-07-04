@@ -1,4 +1,6 @@
 import React from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import queryString from 'query-string';
 import { HeroCard } from '../heroes/HeroCard';
 import { useForm } from '../../hooks/useForm';
 import { heroes } from '../../data/heroes';
@@ -6,18 +8,23 @@ import { heroes } from '../../data/heroes';
 
 export const SearchScreen = () => {
 
-    const heroesFiltered = heroes;
-    const [ formValues, handleInputChange ] = useForm({
-        searchText: '',
-    });
+    const navigate = useNavigate();
+    const location = useLocation();
+    const { q = '' } = queryString.parse(location.search);
 
+    const [ formValues, handleInputChange ] = useForm({
+        searchText: q,
+    });
+    
     const { searchText } = formValues;
+    
+    const heroesFiltered = heroes;
 
     const handleSearch = (e) => {
         e.preventDefault();
-        console.log(searchText);
+        navigate(`?q=${ searchText }`);
     }
-
+    
     return (
         <div>
             <h1>Search Screen</h1>
