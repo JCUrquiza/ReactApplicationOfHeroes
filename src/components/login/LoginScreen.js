@@ -15,7 +15,7 @@ export const LoginScreen = () => {
             payload: {
                 name: 'Juan Carlos'
             }
-        })
+        });
         navigate('/');
     }
 
